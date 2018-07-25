@@ -16,4 +16,5 @@
          --replace /opt/{{ virtualbox_ext_pack }} \
          --accept-license={{ virtualbox_ext_pack_license_agreement }}
   become: true
+  ignore_errors: true
   when: _virtualbox_extpacks_list['stdout'] == 'Extension Packs{{ ':' }} 0'
