@@ -1,4 +1,13 @@
-- name: debian | Installing Virtualbox
+- name: redhat | Installing Pre-Reqs
+  dnf:
+    name: "{{ item }}"
+    state: present
+  become: true
+  with_items:
+    - libselinux-python
+  when: ansible_distribution == "Fedora"
+
+- name: redhat | Installing Virtualbox
   dnf:
     name: "{{ virtualbox_dl_url }}/{{ virtualbox_fedora_package }}"
     state: present
