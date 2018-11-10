@@ -21,12 +21,14 @@
   register: virtualbox_installed
   with_items:
     - "linux{{ kernel_info }}-virtualbox-host-modules"
+    - virtualbox-host-dkms
     - virtualbox-guest-iso
     - virtualbox
 
-- name: arch | Loading Virtualbox Module
-  modprobe:
-    name: vboxdrv
-    state: present
+- name: arch | Reload Virtualbox Modules
+  command: /usr/bin/vboxreload
+#   modprobe:
+#     name: vboxdrv
+#     state: present
   become: true
   when: virtualbox_installed['changed']
