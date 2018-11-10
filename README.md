@@ -1,7 +1,8 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+# ansible-virtualbox
 
-**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+An [Ansible](https://www.ansible.com) role to install [Virtualbox](https://www.virtualbox.org/)
+
+<!-- TOC -->
 
 - [ansible-virtualbox](#ansible-virtualbox)
   - [Requirements](#requirements)
@@ -11,15 +12,16 @@
   - [License](#license)
   - [Author Information](#author-information)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# ansible-virtualbox
-
-An [Ansible](https://www.ansible.com) role to install [Virtualbox](https://www.virtualbox.org/)
+<!-- /TOC -->
 
 ## Requirements
 
-None
+For Archlinux the current method to install Oracle Extensions is to run the
+following manually (for now):
+
+```bash
+pamac build virtualbox-ext-oracle
+```
 
 ## Role Variables
 

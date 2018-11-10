@@ -21,10 +21,11 @@
   register: virtualbox_installed
   with_items:
     - "linux{{ kernel_info }}-virtualbox-host-modules"
-    - virtualbox-host-dkms
+    # - virtualbox-host-dkms
     - virtualbox-guest-iso
     - virtualbox
 
+# May need to reboot if new kernel installed
 - name: arch | Reload Virtualbox Modules
   command: /usr/bin/vboxreload
 #   modprobe:

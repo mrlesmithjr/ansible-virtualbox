@@ -9,3 +9,4 @@
   when: ansible_os_family == "RedHat"
 
 - include_tasks: ext_pack.yml
+  when: ansible_os_family != "Archlinux"
