@@ -9,27 +9,30 @@
 
 - name: arch | Installing linux-headers
   pacman:
-    name: "linux{{ kernel_info }}-headers"
+    name: "{{ 'linux' + kernel_info + '-headers' }}"
     state: present
   become: true
+  register: result
+  until: result is successful
 
 - name: arch | Installing VirtualBox
   pacman:
-    name: "{{ item }}"
+    name:
+      [
+        "{{ 'linux' + kernel_info + '-virtualbox-host-modules' }}",
+        "virtualbox-guest-iso",
+        "virtualbox",
+      ]
     state: present
   become: true
   register: virtualbox_installed
-  with_items:
-    - "linux{{ kernel_info }}-virtualbox-host-modules"
-    # - virtualbox-host-dkms
-    - virtualbox-guest-iso
-    - virtualbox
+  until: virtualbox_installed is successful
 
 # May need to reboot if new kernel installed
 - name: arch | Reload Virtualbox Modules
   command: /usr/bin/vboxreload
-#   modprobe:
-#     name: vboxdrv
-#     state: present
+  #   modprobe:
+  #     name: vboxdrv
+  #     state: present
   become: true
   when: virtualbox_installed['changed']
