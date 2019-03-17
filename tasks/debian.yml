@@ -10,7 +10,7 @@
 
 - name: debian | Installing Virtualbox
   apt:
-    deb: "{{ virtualbox_dl_url + '/virtualbox-' + virtualbox_major_ver + '_' + virtualbox_minor_ver + '-' + virtualbox_build_ver + '~Ubuntu~bionic_amd64.deb' }}"
+    deb: "{{ virtualbox_dl_url + '/virtualbox-' + virtualbox_major_ver|string + '_' + virtualbox_minor_ver|string + '-' + virtualbox_build_ver|string + '~Ubuntu~bionic_amd64.deb' }}"
     state: present
   become: true
   register: result
