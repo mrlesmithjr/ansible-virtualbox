@@ -12,5 +12,7 @@
     state: "present"
   become: true
   when: >
-        ansible_distribution == "Linux Mint" and
-        ansible_distribution_major_version == "19"
+    (ansible_distribution == "Linux Mint" and
+    ansible_distribution_major_version == "19") or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version >= "18.10")
