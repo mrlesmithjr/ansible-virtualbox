@@ -6,7 +6,10 @@
   become: true
   register: result
   until: result is successful
-  when: ansible_distribution != "Linux Mint"
+  when: >
+    ansible_distribution != "Linux Mint" and
+    (ansible_distribution != "Ubuntu" and
+    ansible_distribution_version < "18.10")
 
 - name: debian | Installing Virtualbox
   apt:
