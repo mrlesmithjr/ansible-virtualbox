@@ -22,4 +22,5 @@
     (ansible_distribution == "Linux Mint" and
     ansible_distribution_major_version == "19") or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version >= "18.10")
+    ansible_distribution_version >= "18.10") or
+    ansible_distribution == "elementary OS"
