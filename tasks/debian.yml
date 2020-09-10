@@ -8,7 +8,7 @@
   until: result is successful
   when: >
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version < "18.10") or
+    ansible_distribution_version is version('18.10', '<')) or
     ansible_distribution == "Debian"
 
 - name: debian | Installing Virtualbox
@@ -20,7 +20,19 @@
   until: result is successful
   when: >
     (ansible_distribution == "Linux Mint" and
-    ansible_distribution_major_version == "19") or
+    ansible_distribution_major_version is version('19', '==')) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version >= "18.10") or
+    ansible_distribution_version is version('18.10', '>=') and
+    ansible_distribution_version is version('19.04', '<=')) or
     ansible_distribution == "elementary OS"
+
+- name: debian | Installing Virtualbox
+  apt:
+    deb: "{{ virtualbox_dl_url + '/virtualbox-' + virtualbox_major_ver|string + '_' + virtualbox_minor_ver|string + '-' + virtualbox_build_ver|string + '~Ubuntu~eoan_amd64.deb' }}"
+    state: present
+  become: true
+  register: result
+  until: result is successful
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_version is version('20.04', '>=')
